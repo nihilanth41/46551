@@ -16,11 +16,9 @@ L=256;
 % n_k => number of pixels with intensity level k, k=0 .. 255 
 h = imhist(img, L); 
 
-% compute probability density function (pdf) 
+% compute probability function
 % pr(k) by normalizing h(k)
- for i = 1:L	% For each intensity level
-	pr = h/(M*N);
-end
+pr = h/(M*N);
 
 % compute s(k) 
 % s(k) gives what the new intensity should be
