@@ -41,7 +41,7 @@ imwrite(J, 'out_control.tif');
 
 % write output image
 img_equalized = uint8(img_equalized);
-imwrite(img_equalized, "out.tif");
+imwrite(img_equalized, 'out.tif');
 
 
 
