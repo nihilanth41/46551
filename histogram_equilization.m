@@ -19,24 +19,25 @@ h = imhist(img, L);
 % compute probability density function (pdf) 
 % pr(k) by normalizing h(k)
  for i = 1:L	% For each intensity level
-	% q(i) is the sum of the first i elements of histogram
 	pr = h/(M*N);
 end
 
-% compute s(k) matrix.
+% compute s(k) 
 % s(k) gives what the new intensity should be
 % given the input intensity k e.g. (0->1)
 for i = 1:L
 	s(i) = round( (L-1)*sum(pr(1:i)) );
 end
 
+% compute output image using s(k) function
+% input to s(k) is actually (intensity_value+1) b/c matlab first element index is 1
 for i = 1:M
   for j = 1:N
     img_equalized(i,j) = s( img(i,j)+1 );
   end
 end
 
-% Use octave's histeq for comparison (ground-truth)
+% Use octave image pkg `histeq` function for comparison (ground-truth)
 J = histeq(double(img), L);
 imwrite(J, 'out_control.tif');
 
