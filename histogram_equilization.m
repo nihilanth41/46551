@@ -1,9 +1,10 @@
 % Zachary Rump
 
+% Required for octave - can comment out for matlab
 pkg load image
 
 % read image from file into matrix
-img = imread('test.tif');
+img = imread('in.tif');
 
 % get rows, columns
 [M,N] = size(img);
@@ -34,11 +35,14 @@ for i = 1:M
     img_equalized(i,j) = s( img(i,j)+1 );
   end
 end
- 
-% write output image
 
+% Use octave's histeq for comparison (ground-truth)
+J = histeq(double(img), L);
+imwrite(J, 'out_control.tif');
+
+% write output image
 img_equalized = uint8(img_equalized);
-imwrite(img_equalized, "output_equalized.jpg");
+imwrite(img_equalized, "out.tif");
 
 
 
